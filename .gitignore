@@ -211,3 +211,9 @@ __marimo__/
 *staticfiles/*
 # Ignore all files in media/
 media/*
+# Ignore all migration Python files
+**/migrations/*.py
+**/migrations/*.pyc
+
+# But keep __init__.py so Django recognizes the package
+!**/migrations/__init__.py

@@ -4,7 +4,15 @@ from authentication.managers import UserManager
 from authentication.utils import validate_phone_number
 
 
-class UserModel(AbstractUser):
+class TimeStampedModel(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        abstract = True
+
+
+class UserModel(AbstractUser, TimeStampedModel):
     username = None
     phone_number = models.CharField(
         max_length=13,
@@ -19,6 +27,7 @@ class UserModel(AbstractUser):
             ('USA', 'USA')
         ],
     )
+    is_verified = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'phone_number'
     REQUIRED_FIELDS = ['country']

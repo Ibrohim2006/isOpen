@@ -39,7 +39,7 @@ urlpatterns = [
 
 urlpatterns += i18n_patterns(
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
-    path('auth/', include('authentication.urls')),
+    path('api/v1/auth/', include('authentication.urls')),
 )
 
 if settings.DEBUG:

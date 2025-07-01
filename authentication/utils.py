@@ -3,13 +3,11 @@ import re
 
 
 def validate_phone_number(value):
-    """Validate phone number format for supported countries"""
     patterns = {
         'Uzbekistan': r'^\+998\d{9}$',
         'Russia': r'^\+7\d{10}$',
         'USA': r'^\+1\d{10}$'
     }
-
     for country, pattern in patterns.items():
         if re.fullmatch(pattern, value):
             return
@@ -31,3 +29,8 @@ def get_country_from_phone(phone_number):
     elif phone_number.startswith('+1'):
         return 'USA'
     return None
+
+
+def validate_password_uppercase(value):
+    if not any(char.isupper() for char in value):
+        raise ValidationError("Password must contain at least one uppercase letter.")

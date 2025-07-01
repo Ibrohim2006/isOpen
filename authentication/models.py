@@ -3,6 +3,12 @@ from django.db import models
 from authentication.managers import UserManager
 from authentication.utils import validate_phone_number
 
+COUNTRY_CHOICES = [
+    ('Uzbekistan', 'Uzbekistan'),
+    ('Russia', 'Russia'),
+    ('USA', 'USA'),
+]
+
 
 class TimeStampedModel(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
@@ -15,17 +21,14 @@ class TimeStampedModel(models.Model):
 class UserModel(AbstractUser, TimeStampedModel):
     username = None
     phone_number = models.CharField(
-        max_length=13,
+        max_length=30,
         validators=[validate_phone_number],
         unique=True,
     )
     country = models.CharField(
         max_length=20,
-        choices=[
-            ('Uzbekistan', 'Uzbekistan'),
-            ('Russia', 'Russia'),
-            ('USA', 'USA')
-        ],
+        choices=COUNTRY_CHOICES,
+        default='Uzbekistan',
     )
     is_verified = models.BooleanField(default=False)
 
